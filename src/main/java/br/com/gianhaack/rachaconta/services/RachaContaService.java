@@ -43,13 +43,24 @@ public class RachaContaService {
     }
 
     private BigDecimal calcularValorFinalConta(ContaDTO contaDTO) {
-        return aplicarTaxaGarcom(contaDTO.isTaxaGarcom(), contaDTO.getValorTotal())
-                .subtract(contaDTO.getValorDesconto())
-                .add(contaDTO.getValorEntrega());
+        BigDecimal valorFinal = aplicarTaxaGarcom(contaDTO.isTaxaGarcom(), contaDTO.getValorTotal());
+        valorFinal = valorFinal.subtract(calcularDesconto(valorFinal, contaDTO.getValorDesconto(), contaDTO.isDescontoPercentual()))
+                .add(contaDTO.getValorEntrega());;
+
+        return valorFinal;
     }
 
-    private BigDecimal aplicarTaxaGarcom(boolean taxaGarcom, BigDecimal valorConta) {
-        return taxaGarcom ? valorConta.multiply(new BigDecimal(1.1)) : valorConta;
+    private BigDecimal calcularDesconto(BigDecimal valor, BigDecimal valorDesconto, boolean isPercentual) {
+        if(isPercentual) {
+            BigDecimal taxaCalculo = valorDesconto.divide(new BigDecimal(100));
+            return valor.multiply(taxaCalculo);
+        }
+
+        return  valorDesconto;
+    }
+
+    private BigDecimal aplicarTaxaGarcom(boolean isTaxaGarcom, BigDecimal valorConta) {
+        return isTaxaGarcom ? valorConta.multiply(new BigDecimal(1.1)) : valorConta;
     }
 
     private BigDecimal taxaDaPessoa(BigDecimal valorItemDaPessoa, BigDecimal valorTotalConta) {

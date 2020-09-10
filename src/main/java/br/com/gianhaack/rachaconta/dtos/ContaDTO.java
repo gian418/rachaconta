@@ -19,6 +19,8 @@ public class ContaDTO implements Serializable {
 
     private BigDecimal valorDesconto;
 
+    private boolean descontoPercentual;
+
     private boolean taxaGarcom;
 
     private TipoCobrancaEnum tipoCobranca;
@@ -72,4 +74,13 @@ public class ContaDTO implements Serializable {
     public void setTipoCobranca(TipoCobrancaEnum tipoCobranca) {
         this.tipoCobranca = tipoCobranca;
     }
+
+    public boolean isDescontoPercentual() {
+        return descontoPercentual;
+    }
+
+    public void setDescontoPercentual(boolean descontoPercentual) {
+        this.descontoPercentual = descontoPercentual;
+    }
+
 }
