@@ -138,7 +138,103 @@ public class RachaContaServiceTest {
 
         Assert.isTrue(
                 valorAPagar.compareTo(new BigDecimal(31.92).setScale(2, BigDecimal.ROUND_HALF_EVEN)) == 0,
-                "Problema ao calcular o valor a pagar pelo principal numa conta sem pessoas adicionais e com taxa garcom"
+                "Problema ao calcular o valor a pagar pelo principal numa conta sem pessoas adicionais e sem taxa garcom"
+        );
+    }
+
+    /**
+     * Testa se o valor a pagar pelo principal vai estar correto em uma situação onde
+     * a conta nao tem desconto, com taxa de garcom,
+     * sem entrega e com duas pessoas adicionais
+     */
+    @Test
+    public void valorAPagarPeloPrincipalSemEntregaSemDescontoRealComTaxaGarcomDuasPessoasAdicionaisTipoCobrancaNuconta() {
+        ContaDTO contaDTO = new ContaDTO();
+        contaDTO.setTaxaGarcom(true);
+        contaDTO.setValorTotal(new BigDecimal(50));
+        contaDTO.setTipoCobranca(TipoCobrancaEnum.NUCONTA);
+
+        PessoaAdicionalDTO pessoaAdicional = new PessoaAdicionalDTO();
+        pessoaAdicional.setNome("Maria");
+        pessoaAdicional.setValorTotal(new BigDecimal(4));
+        PessoaAdicionalDTO pessoaAdicional2 = new PessoaAdicionalDTO();
+        pessoaAdicional2.setNome("Pedro");
+        pessoaAdicional2.setValorTotal(new BigDecimal(4));
+
+        contaDTO.getPessoasAdicionais().add(pessoaAdicional);
+        contaDTO.getPessoasAdicionais().add(pessoaAdicional2);
+
+        ResponseContaDTO response = service.calcular(contaDTO);
+        BigDecimal valorAPagar = response.getValorAPagarPessoaPrincipal().setScale(2, BigDecimal.ROUND_HALF_EVEN);
+
+        Assert.isTrue(
+                valorAPagar.compareTo(new BigDecimal(46.20).setScale(2, BigDecimal.ROUND_HALF_EVEN)) == 0,
+                "Problema ao calcular o valor a pagar pelo principal numa conta com duas pessoas adicionais e com taxa garcom"
+        );
+    }
+
+    /**
+     * Testa se o valor a pagar pelo principal vai estar correto em uma situação onde
+     * a conta tem desconto percentual, sem taxa de garcom,
+     * sem entrega e com duas pessoas adicionais
+     */
+    @Test
+    public void valorAPagarPeloPrincipalSemEntregaSemDescontoRealSemTaxaGarcomDuasPessoasAdicionaisSemTipoCobranca() {
+        ContaDTO contaDTO = new ContaDTO();
+        contaDTO.setTaxaGarcom(false);
+        contaDTO.setValorTotal(new BigDecimal(50));
+        contaDTO.setDescontoPercentual(true);
+        contaDTO.setValorDesconto(new BigDecimal(50));
+
+        PessoaAdicionalDTO pessoaAdicional = new PessoaAdicionalDTO();
+        pessoaAdicional.setNome("Maria");
+        pessoaAdicional.setValorTotal(new BigDecimal(4));
+        PessoaAdicionalDTO pessoaAdicional2 = new PessoaAdicionalDTO();
+        pessoaAdicional2.setNome("Pedro");
+        pessoaAdicional2.setValorTotal(new BigDecimal(4));
+
+        contaDTO.getPessoasAdicionais().add(pessoaAdicional);
+        contaDTO.getPessoasAdicionais().add(pessoaAdicional2);
+
+        ResponseContaDTO response = service.calcular(contaDTO);
+        BigDecimal valorAPagar = response.getValorAPagarPessoaPrincipal().setScale(2, BigDecimal.ROUND_HALF_EVEN);
+
+        Assert.isTrue(
+                valorAPagar.compareTo(new BigDecimal(21).setScale(2, BigDecimal.ROUND_HALF_EVEN)) == 0,
+                "Problema ao calcular o valor a pagar pelo principal numa conta com duas pessoas adicionais e com taxa garcom"
+        );
+    }
+
+    /**
+     * Testa se o valor a pagar pelo principal vai estar correto em uma situação onde
+     * a conta tem desconto percentual, sem taxa de garcom,
+     * sem entrega e com duas pessoas adicionais
+     */
+    @Test
+    public void valorAPagarPeloPrincipalSemEntregaSemDescontoRealSemTaxaGarcomDuasPessoasAdicionaisComTipoCobrancaInvalida() {
+        ContaDTO contaDTO = new ContaDTO();
+        contaDTO.setTaxaGarcom(false);
+        contaDTO.setValorTotal(new BigDecimal(50));
+        contaDTO.setDescontoPercentual(true);
+        contaDTO.setValorDesconto(new BigDecimal(50));
+        contaDTO.setTipoCobranca(TipoCobrancaEnum.NEON);
+
+        PessoaAdicionalDTO pessoaAdicional = new PessoaAdicionalDTO();
+        pessoaAdicional.setNome("Maria");
+        pessoaAdicional.setValorTotal(new BigDecimal(4));
+        PessoaAdicionalDTO pessoaAdicional2 = new PessoaAdicionalDTO();
+        pessoaAdicional2.setNome("Pedro");
+        pessoaAdicional2.setValorTotal(new BigDecimal(4));
+
+        contaDTO.getPessoasAdicionais().add(pessoaAdicional);
+        contaDTO.getPessoasAdicionais().add(pessoaAdicional2);
+
+        ResponseContaDTO response = service.calcular(contaDTO);
+        BigDecimal valorAPagar = response.getValorAPagarPessoaPrincipal().setScale(2, BigDecimal.ROUND_HALF_EVEN);
+
+        Assert.isTrue(
+                valorAPagar.compareTo(new BigDecimal(21).setScale(2, BigDecimal.ROUND_HALF_EVEN)) == 0,
+                "Problema ao calcular o valor a pagar pelo principal numa conta com duas pessoas adicionais e com taxa garcom"
         );
     }
 }

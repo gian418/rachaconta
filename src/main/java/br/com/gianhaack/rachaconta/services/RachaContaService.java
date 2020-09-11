@@ -45,12 +45,14 @@ public class RachaContaService {
     private BigDecimal calcularValorFinalConta(ContaDTO contaDTO) {
         BigDecimal valorFinal = aplicarTaxaGarcom(contaDTO.isTaxaGarcom(), contaDTO.getValorTotal());
         valorFinal = valorFinal.subtract(calcularDesconto(valorFinal, contaDTO.getValorDesconto(), contaDTO.isDescontoPercentual()))
-                .add(contaDTO.getValorEntrega());;
+                .add(contaDTO.getValorEntrega() == null ? BigDecimal.ZERO : contaDTO.getValorEntrega());;
 
         return valorFinal;
     }
 
     private BigDecimal calcularDesconto(BigDecimal valor, BigDecimal valorDesconto, boolean isPercentual) {
+        if(valorDesconto == null) return BigDecimal.ZERO;
+
         if(isPercentual) {
             BigDecimal taxaCalculo = valorDesconto.divide(new BigDecimal(100));
             return valor.multiply(taxaCalculo);
@@ -68,6 +70,8 @@ public class RachaContaService {
     }
 
     private String gerarLinkCobranca(TipoCobrancaEnum tipoCobranca, String infoPagamento) {
+        if(tipoCobranca == null) return "Nenhum tipo de cobrança selecionado";
+
         switch (tipoCobranca) {
             case PICPAY:
                 return format(PICPAY.getLinkCobranca(), infoPagamento);
@@ -77,5 +81,4 @@ public class RachaContaService {
                 return "Tipo de cobrança não suportado";
         }
     }
-
 }

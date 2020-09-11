@@ -3,7 +3,9 @@ package br.com.gianhaack.rachaconta.enums;
 public enum TipoCobrancaEnum {
 
     PICPAY("https://www.picpay.com.br/cobrar/%s"),
-    NUCONTA("https://www.nubank.com.br/cobrar/%s");
+    NUCONTA("https://www.nubank.com.br/cobrar/%s"),
+    NEON("Não suportado");
+
 
     private String linkCobranca;
 
