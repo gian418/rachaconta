@@ -2,14 +2,14 @@ package br.com.gianhaack.rachaconta.dtos;
 
 import br.com.gianhaack.rachaconta.enums.TipoCobrancaEnum;
 
-import javax.validation.constraints.NotEmpty;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ContaDTO implements Serializable {
+public class ContaDTO implements Serializable{
     private static final long serialVersionUID = 1L;
 
     @NotNull(message = "Preenchimento obrigatório")
@@ -25,7 +25,7 @@ public class ContaDTO implements Serializable {
 
     private TipoCobrancaEnum tipoCobranca;
 
-    private List<PessoaAdicionalDTO> pessoasAdicionais = new ArrayList<>();
+    private List<@Valid PessoaAdicionalDTO> pessoasAdicionais = new ArrayList<>();
 
     public BigDecimal getValorTotal() {
         return valorTotal;

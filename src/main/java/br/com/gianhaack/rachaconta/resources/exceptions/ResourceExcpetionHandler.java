@@ -22,4 +22,5 @@ public class ResourceExcpetionHandler {
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
     }
+
 }
