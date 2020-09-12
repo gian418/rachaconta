@@ -6,7 +6,7 @@ before_install:
 deploy:
   provider: heroku
   api_key:
-    secure: $HEROKU_API_KEY
+    secure: b9397c3c-845f-4e2d-b280-ec1dcfc5497d
   app: rachaconta-se
   on:
     repo: gian418/rachaconta
