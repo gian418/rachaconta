@@ -27,3 +27,33 @@ https://rachaconta-se.herokuapp.com/swagger-ui.html
 ```
 Obs: é possivel que o primeiro acesso demore um pouco, pois a aplicação "adormece" quando fica um tempo inativa.
 
+#### Utilizando a API
+O endpoint para fazer o calculo da divisão se estiver rodando local:
+```
+POST http://localhost:8080/rest/rachar
+```
+ou para o ambiente no Heroku:
+```
+POST https://rachaconta-se.herokuapp.com/rest/rachar
+```
+
+Exemplo do JSON para adicionar ao corpo do POST:
+```
+{
+  "descontoPercentual": false,
+  "pessoasAdicionais": [
+    {
+      "nome": "Maria",
+      "valorTotal": 8
+    }
+  ],
+  "taxaGarcom": false,
+  "tipoCobranca": "PICPAY",
+  "valorDesconto": 20,
+  "valorEntrega": 8,
+  "valorTotal": 50
+}
+```
+
+É possível executar pelo proprio Swagger ou utilizando uma ferramenta como o Postman
+
