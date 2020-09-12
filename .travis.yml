@@ -1,12 +1,12 @@
 language: java
 jdk:
-  - openjdk8
+- openjdk8
 before_install:
-  - chmod +x mvnw
+- chmod +x mvnw
 deploy:
   provider: heroku
   api_key:
-    secure: $HEROKU_API_KEY
+    secure: EMixguRY/1ayxOalt3uhmerUFQfFSPgXJjmCEyaw8vD3DZbx3EKV1Emmfisno3f8Tqmho1O/Yk77dHajr7f42pYOf7bGX7juc+Jn8DPdP6HZPDvduAbzuUKMy4dMNwBpv8A1w2GhfvcwrIyreE2p0x4S/ULd1zwZq2X4IvfS6vavoor35nEU6cTaUvOgWPt0ZV2TIN0RIXEjZsnpL9MRStqp1BaqqKeZo4GlqZrMMR37gdiSfvT5ctWQP69Txw28xC4C0fRdzykgRj+Xc4vVjMmCVvcPG3HDp23eI/YSbKTFKH9Fu53Zmq5DxcePgIWdE6mTGybeChNUdVPk4ZoJH3SxEswdLiCG9Xr6z+BzDN6XsDk1FCX8Fzey9NfqsLpJ3hN4933qs6jx1DUSBOO9PY3n0EvoJo0BOxCduS/GhkTm0KTDRifobS5y8rx5Y0IStfEB3ARYV4JGmQZ+KuleV68LfoWNrEzM5u28+3JcX/26R//+lbHEavfw+vuFmZxA93z3UCCpZU1zD2sJtTiuFz+RC8pVz7d77uF2J3OHALN1fDc5fPIT2zoiPG5IKHhFhskunqC8pc6ZWMaYywY2gX0Wd2eTbf7vZQqtWwZOE3S3vM02lUJnOVAjm8XNOQKXbPo6/7EFa3jTfQ3MKhUq0RbZJeogerSiMwDQfERIofk=
   app: rachaconta-se
   on:
     repo: gian418/rachaconta
