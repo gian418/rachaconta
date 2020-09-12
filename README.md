@@ -57,3 +57,9 @@ Exemplo do JSON para adicionar ao corpo do POST:
 
 É possível executar pelo proprio Swagger ou utilizando uma ferramenta como o Postman
 
+#### Bibliotecas e frameworks utilizados
+* Spring Boot 2.3.3
+* Swagger 2.9.2
+* Google GSON 2.86
+* Spring Mock MVC
+
